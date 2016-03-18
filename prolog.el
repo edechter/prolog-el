@@ -798,11 +798,14 @@ Set by prolog-build-case-strings.")
 (defconst prolog-quoted-atom-regexp
   "\\(^\\|[^0-9]\\)\\('\\([^\n']\\|\\\\'\\)*'\\)"
   "Regexp matching a quoted atom.")
+(defconst prolog-quoted-or-unquoted-atom-regexp
+  (format "\\(%s\\|%s\\)" prolog-quoted-atom-regexp prolog-atom-regexp))
 (defconst prolog-string-regexp
   "\\(\"\\([^\n\"]\\|\\\\\"\\)*\"\\)"
   "Regexp matching a string.")
 (defconst prolog-head-delimiter "\\(:-\\|\\+:\\|-:\\|\\+\\?\\|-\\?\\|-->\\)"
   "A regexp for matching on the end delimiter of a head (e.g. \":-\").")
+
 
 (defvar prolog-compilation-buffer "*prolog-compilation*"
   "Name of the output buffer for Prolog compilation/consulting.")
@@ -3335,8 +3338,6 @@ objects (relevent only if 'prolog-system' is set to 'sicstus)."
           (point))
       (point))))
 
-(defconst prolog-quoted-or-unquoted-atom-regexp
-  (format "\\(%s\\|%s\\)" prolog-quoted-atom-regexp prolog-atom-regexp))
 
 (defun prolog-clause-info ()
   "Return a (name arity) list for the current clause."
@@ -3349,8 +3350,11 @@ objects (relevent only if 'prolog-system' is set to 'sicstus)."
         ;;       (skip-chars-forward "^ (\\.")
         ;;       (setq predname (buffer-substring op (point))))
         ;;   (setq predname ""))
-        (if (looking-at prolog-quoted-or-unquoted-atom-regexp)                
+        (if (looking-at prolog-quoted-or-unquoted-atom-regexp)
+            (progn
               (setq predname (match-string 0))
+              (goto-char (match-end 0))
+              )
           (setq predname ""))
         ;; Retrieve the arity
         (if (looking-at prolog-left-paren)
