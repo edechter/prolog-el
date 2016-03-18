@@ -5,10 +5,11 @@
 ;; Authors: Emil �str�m <emil_astrom(at)hotmail(dot)com>
 ;;          Milan Zamazal <pdm(at)freesoft(dot)cz>
 ;;          Stefan Bruda <stefan(at)bruda(dot)ca>  (current maintainer)
+;;          Eyal Dechter <eyaldechter@gmail.com>
 ;;          * See below for more details
-;; Keywords: prolog major mode sicstus swi mercury
+;; Keywords: prolog major mode sicstus swi mercury yap
 
-(defvar prolog-mode-version "1.25"
+(defvar prolog-mode-version "1.26"
   "Prolog mode version number")
 
 ;; This program is free software; you can redistribute it and/or modify
@@ -43,6 +44,9 @@
 ;;
 ;; Additions for ECLiPSe and other helpful suggestions: Stephan Heuel
 ;; <heuel(at)ipb(dot)uni-bonn(dot)de>
+;;
+;; This fork of prolog.el is maintained by Eyal Dechter
+;; <eyaldechter(at)gmail(dot)com>
 
 ;;; Commentary:
 ;;
